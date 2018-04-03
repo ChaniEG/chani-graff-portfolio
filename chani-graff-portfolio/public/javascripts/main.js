@@ -1,0 +1,50 @@
+// Demo code from Ihatetomatoes.net
+( function( $ ) {
+
+	// Setup variables
+	$window = $(window);
+	$slide = $('.slideImage');// changed vaviable name
+	$body = $('body');
+
+    //FadeIn all sections
+	$body.imagesLoaded( function() {
+		setTimeout(function() {
+
+		      // Resize sections
+		      adjustWindow();
+
+		      // Fade in sections
+			  $body.removeClass('loading').addClass('loaded');
+
+		}, 800);
+	});
+
+	function adjustWindow(){
+
+		// Init Skrollr
+		var s = skrollr.init({
+		    forceHeight: false,
+		    render: function(data) {
+
+		        //Debugging - Log the current scroll position.
+		        //console.log(data.curTop);
+		    }
+		});
+
+		// Get window size
+	    winH = $window.height();
+
+	    // Keep minimum height 550
+	    if(winH <= 550) {
+			winH = 550;
+		}
+
+	    // Resize our slides
+	    $slide.height(winH);
+
+	    // Refresh Skrollr after resizing our sections
+	    s.refresh($('.homeSlide'));
+
+	}
+
+} )( jQuery );
